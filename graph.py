@@ -2,14 +2,30 @@
 
 import matplotlib.pyplot as plt
 from networkx import nx
+from load_data import CourseData
+
+course_data = CourseData("course_data.json")
 
 DG=nx.DiGraph()
-DG.add_node("18.01")
-DG.add_node("18.02")
-DG.add_node("18.06")
-DG.add_edge("18.01", "18.02") 
-DG.add_edge("18.02", "18.06") 
-print(DG.edges("18.01"))
+
+course_dict = course_data.create_course_dict()
+
+for node in course_data.get_course_list():
+    DG.add_node(node)
+    attribute_dict = course_dict[node]
+    for key in attribute_dict:
+        DG.node[node][key] = attribute_dict[key]
+
+
+# test nodes:
+# test_DG=nx.DiGraph()
+# test_DG.add_node("18.01")
+# test_DG.add_node("18.02")
+# test_DG.add_node("18.06")
+# test_DG.add_edge("18.01", "18.02") 
+# test_DG.add_edge("18.02", "18.03") 
+# test_DG.add_edge("18.02", "18.06") 
+
 
 # pathlengths = []
 
@@ -45,5 +61,12 @@ print(DG.edges("18.01"))
 # print("density: %s" % nx.density(G))
 
 # #nx.draw(G, with_labels=True)
-# nx.draw(G, with_labels=True)
-# plt.show()
+
+pos = nx.shell_layout(DG)
+
+plt.figure(3,figsize=(13,7)) 
+nx.draw_networkx(DG, with_labels=False, node_size = 80)
+plt.show()
+
+# print(DG.nodes())
+# print(len(DG.nodes()))
