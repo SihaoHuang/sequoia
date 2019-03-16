@@ -83,7 +83,51 @@ class CourseData:
 
         print("Length: " + str(self.get_course_count()))
 
-        
-data = CourseData("course_data.json")
-print(data.print_courses())
+    def create_prereq_list(self, prereq_string):
+        """Helper function to parse prereqs, returns list of prereqs regardless of or/and.
+        Input: string of the prereq data entry
+        Output: list of prereqs"""
 
+        prereq_list = []
+
+        for each in self.get_course_list():
+            if each in prereq_string:
+                prereq_list.append(each)
+        
+        if "instructor" in prereq_string:
+            prereq_list.append("Permission of instructor")
+        if "GIR:CHEM" in prereq_string:
+            prereq_list.append("3.091")
+            prereq_list.append("5.111")
+            prereq_list.append("5.112")
+        if "GIR:PHYS1" in prereq_string:
+            prereq_list.append("8.01")
+            prereq_list.append("8.011")
+            prereq_list.append("8.012")
+            prereq_list.append("8.01L")
+        if "GIR:PHYS2" in prereq_string:
+            prereq_list.append("8.02")
+            prereq_list.append("8.021")
+            prereq_list.append("8.022")
+        if "GIR:CAL1" in prereq_string:
+            prereq_list.append("18.01")
+            prereq_list.append("18.01A")
+        if "GIR:CAL2" in prereq_string:
+            prereq_list.append("18.02")
+            prereq_list.append("18.02A")
+            prereq_list.append("18.022")
+        if "GIR:BIOL" in prereq_string:
+            prereq_list.append("7.012")
+            prereq_list.append("7.013")
+            prereq_list.append("7.014")
+            prereq_list.append("7.015")
+            prereq_list.append("7.016")
+
+        return prereq_list
+            
+# data = CourseData("course_data.json")
+# data_dict = data.create_course_dict()
+# for each in data_dict.values():
+#     print(data.create_prereq_list(each["prereqs"]))
+#     #print(each["prereqs"])
+    
