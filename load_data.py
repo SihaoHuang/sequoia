@@ -2,9 +2,8 @@ import json
 from pprint import pprint
 
 with open('course_data.json', encoding="utf8") as f:
+    data = json.load(f)["items"]
 
-    data = json.load(f)
-
-pprint(data)
-
-#open('data.txt', encoding="utf8").read()
+for entry in data:
+    if entry["type"] == "Class":
+        print(entry["id"])
