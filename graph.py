@@ -8,23 +8,29 @@ course_data = CourseData("course_data.json")
 
 DG=nx.DiGraph()
 
-course_dict = course_data.create_course_dict()
+# course_dict = course_data.create_course_dict(), course_data.get_course_list()
 
-for node in course_data.get_course_list():
+#STRIP DASHES FOR FUCKS SAKE
+course_dict = {"6.0001": {"label":"Engineering Computation and Data Science", "total-units":"12"}}
+
+for node in ["6.0001"]:
     DG.add_node(node)
     attribute_dict = course_dict[node]
     for key in attribute_dict:
         DG.node[node][key] = attribute_dict[key]
 
+print(DG.nodes(data=True))
+pos = nx.nx_pydot.graphviz_layout(DG)
+
 
 # test nodes:
-# test_DG=nx.DiGraph()
-# test_DG.add_node("18.01")
-# test_DG.add_node("18.02")
-# test_DG.add_node("18.06")
-# test_DG.add_edge("18.01", "18.02") 
-# test_DG.add_edge("18.02", "18.03") 
-# test_DG.add_edge("18.02", "18.06") 
+# DG=nx.DiGraph()
+# DG.add_node("18.01")
+# DG.add_node("18.02")
+# DG.add_node("18.06")
+# DG.add_edge("18.01", "18.02") 
+# DG.add_edge("18.02", "18.03") 
+# DG.add_edge("18.02", "18.06") 
 
 
 # pathlengths = []
@@ -62,10 +68,10 @@ for node in course_data.get_course_list():
 
 # #nx.draw(G, with_labels=True)
 
-pos = nx.shell_layout(DG)
+
 
 plt.figure(3,figsize=(13,7)) 
-nx.draw_networkx(DG, with_labels=False, node_size = 80)
+nx.draw_networkx(DG, with_labels=False, node_size = 80, nodelist = ["6.0001"])
 plt.show()
 
 # print(DG.nodes())
