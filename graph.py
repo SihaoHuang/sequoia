@@ -6,11 +6,10 @@ from networkx import nx
 DG=nx.DiGraph()
 DG.add_node("18.01")
 DG.add_node("18.02")
+DG.add_node("18.06")
 DG.add_edge("18.01", "18.02") 
+DG.add_edge("18.02", "18.06") 
 print(DG.edges("18.01"))
-
-
-
 
 # pathlengths = []
 
