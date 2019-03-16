@@ -13,7 +13,7 @@ class CourseData:
         """Returns: int, total number of courses"""
 
         course_count = 0
-        for entry in data:
+        for entry in self.data:
             if entry["type"] == "Class":
                 course_count += 1
         return course_count
@@ -79,7 +79,11 @@ class CourseData:
         for entry in self.data:
             if entry["type"] == "Class":
                 print(entry["id"] + ": " + entry["label"])
-                time.sleep(0.01)
+                time.sleep(0.001)
 
         print("Length: " + str(self.get_course_count()))
+
+        
+data = CourseData("course_data.json")
+print(data.print_courses())
 
