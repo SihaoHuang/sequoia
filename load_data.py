@@ -82,8 +82,4 @@ class CourseData:
                 time.sleep(0.01)
 
         print("Length: " + str(self.get_course_count()))
-        
-dat = CourseData("course_data.json")
-print(dat.create_course_dict())
-
 
