@@ -35,7 +35,7 @@ class CourseData:
                     ans.append(entry["id"])
         else:
             for entry in self.data:
-                if entry["type"] == "Class" & entry["course"] == department:
+                if entry["type"] == "Class" and entry["course"] == department:
                     ans.append(entry["id"])
         return ans
 
@@ -77,7 +77,7 @@ class CourseData:
                     course_dict[entry["id"]] = entry_dict
         else:
             for entry in self.data:
-                if entry["type"] == "Class" & entry["course"] == department:
+                if entry["type"] == "Class" and entry["course"] == department:
                     
                     entry_dict = {}
 
