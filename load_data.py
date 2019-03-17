@@ -33,8 +33,9 @@ class CourseData:
                 ans.append(entry["id"])
         return ans
 
-    def create_course_dict(self):
-        """Returns: dictionary of dictionaries, the first dictionary is keyed by a string
+    def create_course_dict(self, department="all"):
+        """Default: returns all courses. Input: Specify course name in string.
+        Returns: dictionary of dictionaries, the first dictionary is keyed by a string
         of the class id, the second has the following keys.
         'type': with possibilities 'Class', 'RecitationSession', 'LectureSession', 'LabSession'
         'label': course title
@@ -50,23 +51,42 @@ class CourseData:
         """
         course_dict = {}
 
-        for entry in self.data:
-            if entry["type"] == "Class":
-                
-                entry_dict = {}
+        if department == "all":
+            for entry in self.data:
+                if entry["type"] == "Class":
+                    
+                    entry_dict = {}
 
-                entry_dict["label"] = entry["label"] 
-                # entry_dict["level"] = entry["level"]
-                # entry_dict["description"] = entry["description"]
-                entry_dict["prereqs"] = entry["prereqs"]
-                # entry_dict["equivalent_subjects"] = entry["equivalent_subjects"]
-                # entry_dict["joint_subjects"] = entry["joint_subjects"]
-                # entry_dict["hass_attribute"] = entry["hass_attribute"]
-                # entry_dict["gir_attribute"] = entry["gir_attribute"]
-                # entry_dict["total_units"] = entry["total_units"]
-                # entry_dict["course"] = entry["course"]
+                    entry_dict["label"] = entry["label"] 
+                    # entry_dict["level"] = entry["level"]
+                    # entry_dict["description"] = entry["description"]
+                    entry_dict["prereqs"] = entry["prereqs"]
+                    # entry_dict["equivalent_subjects"] = entry["equivalent_subjects"]
+                    # entry_dict["joint_subjects"] = entry["joint_subjects"]
+                    # entry_dict["hass_attribute"] = entry["hass_attribute"]
+                    # entry_dict["gir_attribute"] = entry["gir_attribute"]
+                    # entry_dict["total_units"] = entry["total_units"]
+                    # entry_dict["course"] = entry["course"]
 
-                course_dict[entry["id"]] = entry_dict
+                    course_dict[entry["id"]] = entry_dict
+        else:
+            for entry in self.data:
+                if entry["type"] == "Class" & entry["course"] == department:
+                    
+                    entry_dict = {}
+
+                    entry_dict["label"] = entry["label"] 
+                    # entry_dict["level"] = entry["level"]
+                    # entry_dict["description"] = entry["description"]
+                    entry_dict["prereqs"] = entry["prereqs"]
+                    # entry_dict["equivalent_subjects"] = entry["equivalent_subjects"]
+                    # entry_dict["joint_subjects"] = entry["joint_subjects"]
+                    # entry_dict["hass_attribute"] = entry["hass_attribute"]
+                    # entry_dict["gir_attribute"] = entry["gir_attribute"]
+                    # entry_dict["total_units"] = entry["total_units"]
+                    # entry_dict["course"] = entry["course"]
+
+                    course_dict[entry["id"]] = entry_dict
                 
         return course_dict
 
@@ -95,8 +115,8 @@ class CourseData:
             if each in prereq_string:
                 prereq_list.append(each)
         
-        if "instructor" in prereq_string:
-            prereq_list.append("Permission of instructor")
+        # if "instructor" in prereq_string:
+        #     prereq_list.append("Permission of instructor")
         if "GIR:CHEM" in prereq_string:
             prereq_list.append("3.091")
             prereq_list.append("5.111")
