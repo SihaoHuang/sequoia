@@ -4,23 +4,28 @@ import matplotlib.pyplot as plt
 from networkx import nx
 from load_data import CourseData
 
-course_data = CourseData("course_data.json")
+course_data = CourseData("edited_course.json")
 
 DG=nx.DiGraph()
 
-# course_dict = course_data.create_course_dict(), course_data.get_course_list()
+course_dict = course_data.create_course_dict()
+course_list = course_data.get_course_list()
 
-#STRIP DASHES FOR FUCKS SAKE
-course_dict = {"6.0001": {"label":"Engineering Computation and Data Science", "total-units":"12"}}
+# course_dict = {"1.00": {"type":"Class", "id":"21M.714", "label":"Contemporary American Theater", "shortLabel":"Contemporary American Theater", "level":"Undergraduate", "hi":"", "total_units":12, "units":"3_0_9", "course":"21M", "description":"Examines the exciting terrain of contemporary American writing for the theater, focusing on what is known in New York as \"Off Broadway,\" \"downtown,\" or \"indie theater.\" Students read work by influential playwrights from earlier generations alongside plays by new voices currently in production in Boston, New York, and across the country. Students also examine the changing institution of American theater, reading a selection of plays in order to determine what constellation of issues and concerns they engage. Discussions unpack how these plays reflect, challenge and re_construct the idea of America in the 21st century. Enrollment limited.", "prereqs":"", "offering":"Y", "semester":["Spring"], "in_charge":"Urban, Kenneth", "year":"2019", "master_subject_id":"21M.714", "equivalent_subjects":[""], "joint_subjects":[""], "meets_with_subjects":[""], "fall_instructors":["K. Urban"], "spring_instructors":["K. Urban"], "is_variable_units":"N", "hass_attribute":"HA", "comm_req_attribute":"CIH", "gir_attribute":""}}
+# course_list = ["1.00"]
 
-for node in ["6.0001"]:
+for node in course_list:
     DG.add_node(node)
     attribute_dict = course_dict[node]
     for key in attribute_dict:
         DG.node[node][key] = attribute_dict[key]
+    prereq_string = DG.node[node]["prereqs"]
+    prereqs = course_data.create_prereq_list(prereq_string)
+    for prereq in prereqs:
+        DG.add_edge(prereq, node)
 
-print(DG.nodes(data=True))
-pos = nx.nx_pydot.graphviz_layout(DG)
+
+pos = nx.kamada_kawai_layout(DG)
 
 
 # test nodes:
@@ -71,7 +76,7 @@ pos = nx.nx_pydot.graphviz_layout(DG)
 
 
 plt.figure(3,figsize=(13,7)) 
-nx.draw_networkx(DG, with_labels=False, node_size = 80, nodelist = ["6.0001"])
+nx.draw_networkx_nodes(DG, with_labels=True, node_size = 80)
 plt.show()
 
 # print(DG.nodes())

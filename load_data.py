@@ -9,6 +9,7 @@ class CourseData:
             self.data = json.load(f)["items"] 
             # data is a list of dictionaries, each corresponding to a course
 
+
     def get_course_count(self):
         """Returns: int, total number of courses"""
 
@@ -44,7 +45,7 @@ class CourseData:
         'joint_subjects'
         'hass_attribute'
         'gir_attribute'
-        'total-units'
+        'total_units'
         'course'
         """
         course_dict = {}
@@ -55,15 +56,15 @@ class CourseData:
                 entry_dict = {}
 
                 entry_dict["label"] = entry["label"] 
-                entry_dict["level"] = entry["level"]
-                entry_dict["description"] = entry["description"]
+                # entry_dict["level"] = entry["level"]
+                # entry_dict["description"] = entry["description"]
                 entry_dict["prereqs"] = entry["prereqs"]
-                entry_dict["equivalent_subjects"] = entry["equivalent_subjects"]
-                entry_dict["joint_subjects"] = entry["joint_subjects"]
-                entry_dict["hass_attribute"] = entry["hass_attribute"]
-                entry_dict["gir_attribute"] = entry["gir_attribute"]
-                entry_dict["total-units"] = entry["total-units"]
-                entry_dict["course"] = entry["course"]
+                # entry_dict["equivalent_subjects"] = entry["equivalent_subjects"]
+                # entry_dict["joint_subjects"] = entry["joint_subjects"]
+                # entry_dict["hass_attribute"] = entry["hass_attribute"]
+                # entry_dict["gir_attribute"] = entry["gir_attribute"]
+                # entry_dict["total_units"] = entry["total_units"]
+                # entry_dict["course"] = entry["course"]
 
                 course_dict[entry["id"]] = entry_dict
                 
