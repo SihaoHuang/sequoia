@@ -25,7 +25,7 @@ for node in course_list:
         DG.add_edge(prereq, node)
 
 
-pos = nx.kamada_kawai_layout(DG)
+pos = nx.spring_layout(DG)
 
 
 # test nodes:
@@ -76,7 +76,7 @@ pos = nx.kamada_kawai_layout(DG)
 
 
 plt.figure(3,figsize=(13,7)) 
-nx.draw_networkx_nodes(DG, with_labels=True, node_size = 80)
+nx.draw_networkx(DG, pos, with_labels=True, node_size = 80, alpha = 0.1)
 plt.show()
 
 # print(DG.nodes())
