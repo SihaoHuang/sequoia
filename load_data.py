@@ -24,13 +24,19 @@ class CourseData:
 
         return self.data.copy()
 
-    def get_course_list(self):
-        """Returns: list, list of all classes available (id)"""
+    def get_course_list(self, department="all"):
+        """Default: returns all courses. Input: Specify course name in string.
+        Returns: list, list of all classes available (id)"""
 
         ans = []
-        for entry in self.data:
-            if entry["type"] == "Class":
-                ans.append(entry["id"])
+        if department == "all":
+            for entry in self.data:
+                if entry["type"] == "Class":
+                    ans.append(entry["id"])
+        else:
+            for entry in self.data:
+                if entry["type"] == "Class" & entry["course"] == department:
+                    ans.append(entry["id"])
         return ans
 
     def create_course_dict(self, department="all"):
