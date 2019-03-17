@@ -25,7 +25,7 @@ for node in course_list:
         DG.add_edge(prereq, node)
 
 
-pos = nx.spring_layout(DG)
+pos = nx.nx_pydot.graphviz_layout(DG, prog='neato')
 
 
 # test nodes:
@@ -78,6 +78,6 @@ pos = nx.spring_layout(DG)
 plt.figure(3,figsize=(13,7)) 
 nx.draw_networkx(DG, pos, with_labels=True, node_size = 80, alpha = 0.1)
 plt.show()
-
+      
 # print(DG.nodes())
 # print(len(DG.nodes()))
